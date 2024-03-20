@@ -100,9 +100,9 @@ export default (env) => {
        * dependency. You might need it when using workspaces/monorepos or unconventional project
        * structure. For simple/typical project you won't need it.
        */
-      // alias: {
-      //   'react-native': reactNativePath,
-      // },
+      alias: {
+        'react-native': reactNativePath,
+      },
     },
     /**
      * Configures output.
@@ -113,7 +113,7 @@ export default (env) => {
      */
     output: {
       clean: true,
-      hashFunction: 'xxhash64',
+      // hashFunction: 'xxhash64',
       path: path.join(dirname, 'build/generated', platform),
       filename: 'index.bundle',
       chunkFilename: '[name].chunk.bundle',
@@ -243,12 +243,12 @@ export default (env) => {
         /**
          * The name of the module is used to identify the module in URLs resolver and imports.
          */
-        name: 'smart',
+        name: 'meralco',
         /**
          * This is a list of modules that will be shared between remote containers.
          */
         exposes: {
-          './App': './src/navigation/MainNavigator',
+          './App': './App',
         },
         /**
          * Shared modules are shared in the share scope.
@@ -256,7 +256,11 @@ export default (env) => {
          * Their names are used to match requested modules in this compilation.
          */
         shared: getSharedDependencies({eager: STANDALONE}),
-      })
+      }),
+      // new Repack.plugins.CodeSigningPlugin({
+      //   privateKeyPath: path.join('..', '..', 'code-signing.pem'),
+      //   outputPath: path.join('build', 'outputs', platform, 'remotes'),
+      // }),
     ],
   };
 };
